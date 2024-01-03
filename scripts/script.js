@@ -26,8 +26,11 @@ const products = [{
     priceCents: 799
 }];
 
+
+let productsHTML = '';
+
 products.forEach((product) => {
-    const html = `
+    productsHTML += `
          <div class="product-container">
             <div class="product-image-container">
                 <img class="product-image"
@@ -77,6 +80,7 @@ products.forEach((product) => {
             </button>
             </div>
     `;
-
-    console.log(html);
+ 
 });
+
+console.log(productsHTML);
