@@ -1,6 +1,8 @@
 import {cart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
+let cartSummaryHTML = '';
+
 cart.forEach((cartItem) => {
     const productId = cartItem.productId;
 
@@ -14,7 +16,7 @@ cart.forEach((cartItem) => {
 
 //lets create a template string for html using ``
 
-`
+cartSummaryHTML +=`
 <div class="cart-item-container">
     <div class="delivery-date">
     Delivery date: Tuesday, June 21
@@ -165,6 +167,10 @@ src="images/products/intermediate-composite-basketball.jpg">
 </div>
 </div>
 
-`
-
+`;
 });
+
+document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+//generating all this HTML using JS and putting it on the page
+
+console.log(cartSummaryHTML);
