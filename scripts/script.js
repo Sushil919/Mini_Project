@@ -1,5 +1,5 @@
-import {cart} from '../data/cart.js';
-import {products} from '../data/products.js'
+import { cart } from '../data/cart.js';
+import { products } from '../data/products.js'
 
 let productsHTML = '';
 
@@ -54,51 +54,53 @@ products.forEach((product) => {
             </button>
             </div>
     `;
- 
+
 });
 
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
 
-function addToCart(productId){
+
+function addToCart(productId) {
     let matchingItem;
 
-    cart.forEach((item) => {
-        if(productId === item.productId){
-            matchingItem = item;
+    cart.forEach((cartItem) => {
+        if (productId === cartItem.productId) {
+            matchingItem = cartItem;
         }
     });
 
-        if(matchingItem){
-            matchingItem.quantity+=1;
-        }
-        else{
-            cart.push({
-                productId: productId,
-                quantity: 1
-            });
-        }   
-}
-
-
-function updateCartQuantity(){
-    let cartQuantity = 0; 
-        
-        cart.forEach((item) => {
-            cartQuantity += item.quantity;
+    if (matchingItem) {
+        matchingItem.quantity += 1;
+    }
+    else {
+        cart.push({
+            productId: productId,
+            quantity: 1
         });
+    }
+}
 
-        document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+function updateCartQuantity() {
+    let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+
+    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
 
 
 
-document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
 
 //Adding eventListener to add to cart button
 const myCart = document.querySelectorAll('.js-add-to-cart');
 myCart.forEach((button) => {
-   button.addEventListener('click',() => {
-    const productId = button.dataset.productId;
-    addToCart(productId);
-    updateCartQuantity()
-   });
+    button.addEventListener('click', () => {
+        const productId = button.dataset.productId;
+        addToCart(productId);
+        updateCartQuantity();
+    });
 });
